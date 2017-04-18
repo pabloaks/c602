@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import math
+
 class Location(object):
     def __init__(self, x, y):
         '''x and y are floats'''
@@ -63,8 +65,9 @@ class UsualDrunk(Drunk):
 
 class ColdDrunk(Drunk):
     def takeStep(self):
-        stepChoices = [(0.0, 0.9), (0.0, -1.1), (1.0, 0.0), (-1.0, 0.0)]
-        return random.choice(stepChoices)
+        ang = 2 * math.pi * random.random()
+        length = 0.5 + 0.5 * random.random()
+        return (length * math.sin(ang), length * math.cos(ang))
 
 def walk(f, d, numSteps):
     start = f.getLoc(d)
@@ -208,8 +211,8 @@ def traceWalk(fieldKinds, numSteps):
     
 
 def main():
-    #plotLocs((UsualDrunk, ColdDrunk), 1000, 100)
-    traceWalk((Field, OddField), 5000)
+    plotLocs((UsualDrunk, ColdDrunk), 1000, 100)
+    #traceWalk((Field, OddField), 5000)
     
 if __name__ == '__main__':
     main()
